@@ -3,8 +3,8 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
   id: Celery-App-Build
-  args: ['build', '-f', 'Dockerfile.celery', '-t', 'gcr.io/${PROJECT_ID}/celery-app:$TAG_NAME', '.']
+  args: ['build', '-f', 'Dockerfile.celery', '-t', 'gcr.io/${PROJECT_ID}/celery-app-release:$TAG_NAME', '.']
 
 - name: 'gcr.io/cloud-builders/docker'
   id: Celery-App-Push
-  args: ['push', 'gcr.io/${PROJECT_ID}/celery-app:$TAG_NAME']
+  args: ['push', 'gcr.io/${PROJECT_ID}/celery-app-release:$TAG_NAME']

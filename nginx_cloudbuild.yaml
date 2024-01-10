@@ -3,8 +3,8 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
   id: Nginx-App-Build
-  args: ['build', '-f', 'Dockerfile.nginx', '-t', 'gcr.io/${PROJECT_ID}/nginx-app:$TAG_NAME', '.']
+  args: ['build', '-f', 'Dockerfile.nginx', '-t', 'gcr.io/${PROJECT_ID}/nginx-app-release:$TAG_NAME', '.']
 
 - name: 'gcr.io/cloud-builders/docker'
   id: Nginx-App-Push
-  args: ['push', 'gcr.io/${PROJECT_ID}/nginx-app:$TAG_NAME']
+  args: ['push', 'gcr.io/${PROJECT_ID}/nginx-app-release:$TAG_NAME']

@@ -3,3 +3,5 @@
 .dockerignore
 .idea
 __pycache__
+config-secrets-encoded.yaml
+config-secrets.yaml
