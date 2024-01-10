@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    image: nginx:v1
+    ports:
+      - "80:80"
+    depends_on:
+      - flask
+    env_file:
+      - .env
+
+  flask:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: flask_app:v1
+    ports:
+      - "5000:5000"
+    depends_on:
+      - rabbitmq
+      - celery
+    env_file:
+      - .env
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    env_file:
+      - .env
+  redis:
+    image: "redis"
+    ports:
+      - "6379:6379"
+
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile.celery
+    image: celery_app:v1
+    depends_on:
+      - rabbitmq
+    env_file:
+      - .env
+  mongo:
+    image: "mongo"
+    ports:
+      - "27017:27017"

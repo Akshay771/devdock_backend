@@ -1,0 +1,10 @@
+# FLASK BUILD
+
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  id: Flask-App-Build
+  args: ['build', '-f', 'Dockerfile', '-t', 'gcr.io/${PROJECT_ID}/flask-app:$TAG_NAME', '.']
+
+- name: 'gcr.io/cloud-builders/docker'
+  id: Flask-App-Push
+  args: ['push', 'gcr.io/${PROJECT_ID}/flask-app:$TAG_NAME']

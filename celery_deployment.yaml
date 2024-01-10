@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-deployment
+  labels:
+    app: celery-app
+spec:
+  selector:
+    matchLabels:
+      app: celery-app
+  template:
+    metadata:
+      labels:
+        app: celery-app
+    spec:
+      containers:
+      - name: celery-app
+        image: gcr.io/fifth-incentive-409919/celery_app:v1
+        ports:
+        - containerPort: 5000
+#        resources:
+#          requests:de
+#            memory: "64Mi"  # Set the memory request
+#            cpu: "250m"     # Set the CPU request
+#          limits:
+#            memory: "128Mi" # Set the memory limit
+#            cpu: "500m"     # Set the CPU limit
+      env:
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: config-secrets
+              key: MONGO_URI
+        - name: MAIL_SERVER
+          valueFrom:
+            secretKeyRef:
+              name: config-secrets
+              key: MAIL_SERVER
+        - name: MAIL_PORT
+          valueFrom:
+            secretKeyRef:
+              name: config-secrets
+              key: MAIL_PORT
+        - name: MAIL_USE_TLS
+          valueFrom:
+            secretKeyRef:
+              name: config-secrets
+              key: MAIL_USE_TLS
+        - name: MAIL_USE_SSL
+          valueFrom:
+            secretKeyRef:
+              name: config-secrets
+              key: MAIL_USE_SSL
+        - name: MAIL_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: config-secrets
+              key: MAIL_USERNAME
+        - name: MAIL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: config-secrets
+              key: MAIL_PASSWORD
+        - name: CELERY_BROKER
+          valueFrom:
+            secretKeyRef:
+              name: config-secrets
+              key: CELERY_BROKER
+        - name: CELERY_BACKEND
+          valueFrom:
+            secretKeyRef:
+              name: config-secrets
+              key: CELERY_BACKEND
+        - name: SENDER_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: config-secrets
+              key: SENDER_EMAIL
+        - name: SENDER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: config-secrets
+              key: SENDER_PASSWORD
+        - name: SENDER_NAME
+          valueFrom:
+            secretKeyRef:
+              name: config-secrets
+              key: SENDER_NAME
+        - name: ADMIN_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: config-secrets
+              key: ADMIN_EMAIL
