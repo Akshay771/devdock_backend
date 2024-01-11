@@ -18,6 +18,7 @@ app.config['MAIL_USE_TLS'] = os.environ.get('MAIL_USE_TLS')
 app.config['MAIL_USE_SSL'] = os.environ.get('MAIL_USE_SSL')
 app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+app.config['CELERY_BROKER_URL'] = os.environ.get('CELERY_BROKER')
 
 mongo = PyMongo(app)
 mail = Mail(app)
