@@ -11,6 +11,7 @@ app_bp = Blueprint('app_bp', __name__)
 
 class SubmitForm(Resource):
     def post(self):
+        print(os.environ.get('CELERY_BROKER'))
         try:
             if request.is_json:
                 # Handle JSON data
