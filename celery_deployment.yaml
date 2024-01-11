@@ -15,9 +15,8 @@ spec:
     spec:
       containers:
       - name: celery-app
-        image: gcr.io/fifth-incentive-409919/celery-app-release:1.0.1
-        ports:
-        - containerPort: 5000
+        image: gcr.io/fifth-incentive-409919/celery-app-release:celery-app-1.0.1
+        imagePullPolicy: IfNotPresent
 #        resources:
 #          requests:de
 #            memory: "64Mi"  # Set the memory request
