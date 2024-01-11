@@ -20,7 +20,7 @@ app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 print(os.environ.get('CELERY_BROKER'))
 app.config['CELERY_BROKER_URL'] = os.environ.get('CELERY_BROKER')
-app.config['BROKER_URL'] = os.environ.get('CELERY_BROKER')
+# app.config['BROKER_URL'] = os.environ.get('CELERY_BROKER')
 
 mongo = PyMongo(app)
 mail = Mail(app)
