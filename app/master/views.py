@@ -47,19 +47,19 @@ class FlaskHealthCheck(Resource):
         return make_response(jsonify({"health-check": "true"}), 200)
 
 
-class CeleryHealthCheck(Resource):
-    def get(self):
-        try:
-            # Trigger the Celery health check task
-            result = celery_health_check.apply_async().get()
-            if result["success"]:
-                return {"status": "ok", "message": result["message"]}, 200
-            else:
-                return {"status": "error", "message": result["message"]}, 500
-        except Exception as e:
-            return {"status": "error", "message": str(e)}, 500
+# class CeleryHealthCheck(Resource):
+#     def get(self):
+#         try:
+#             # Trigger the Celery health check task
+#             result = celery_health_check.apply_async().get()
+#             if result["success"]:
+#                 return {"status": "ok", "message": result["message"]}, 200
+#             else:
+#                 return {"status": "error", "message": result["message"]}, 500
+#         except Exception as e:
+#             return {"status": "error", "message": str(e)}, 500
 
 
-api.add_resource(FlaskHealthCheck, "/flask-health-check")
-api.add_resource(CeleryHealthCheck, "/celery-health-check")
+api.add_resource(FlaskHealthCheck, "/health-check")
+# api.add_resource(CeleryHealthCheck, "/celery-health-check")
 api.add_resource(SubmitForm, "/submit_form")

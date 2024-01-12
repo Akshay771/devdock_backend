@@ -3,6 +3,7 @@ from app import celery_app
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+print("here in celery task section")
 
 sender_email = os.environ.get('SENDER_EMAIL')
 sender_password = os.environ.get('SENDER_PASSWORD')
