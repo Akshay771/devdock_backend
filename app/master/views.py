@@ -47,6 +47,12 @@ class FlaskHealthCheck(Resource):
         return make_response(jsonify({"health-check": "true"}), 200)
 
 
+class TestEndPoint(Resource):
+
+    def get(self):
+        return make_response(jsonify({"Modified Version": "v1"}), 200)
+
+
 # class CeleryHealthCheck(Resource):
 #     def get(self):
 #         try:
@@ -61,5 +67,6 @@ class FlaskHealthCheck(Resource):
 
 
 api.add_resource(FlaskHealthCheck, "/health-check")
+api.add_resource(TestEndPoint, "/test")
 # api.add_resource(CeleryHealthCheck, "/celery-health-check")
 api.add_resource(SubmitForm, "/submit_form")
