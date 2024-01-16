@@ -1,0 +1,337 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: flask-app
+  managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:kubectl.kubernetes.io/last-applied-configuration': {}
+          'f:labels':
+            .: {}
+            'f:app': {}
+        'f:spec':
+          'f:progressDeadlineSeconds': {}
+          'f:revisionHistoryLimit': {}
+          'f:selector': {}
+          'f:strategy':
+            'f:rollingUpdate':
+              .: {}
+              'f:maxSurge': {}
+              'f:maxUnavailable': {}
+            'f:type': {}
+          'f:template':
+            'f:metadata':
+              'f:labels':
+                .: {}
+                'f:app': {}
+            'f:spec':
+              'f:containers':
+                'k:{"name":"flask-app"}':
+                  .: {}
+                  'f:env':
+                    .: {}
+                    'k:{"name":"ADMIN_EMAIL"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"CELERY_BACKEND"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"CELERY_BROKER"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"MAIL_PASSWORD"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"MAIL_PORT"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"MAIL_SERVER"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"MAIL_USE_SSL"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"MAIL_USE_TLS"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"MAIL_USERNAME"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"MONGO_URI"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"SENDER_EMAIL"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"SENDER_NAME"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"SENDER_PASSWORD"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                  'f:imagePullPolicy': {}
+                  'f:name': {}
+                  'f:ports':
+                    .: {}
+                    'k:{"containerPort":5000,"protocol":"TCP"}':
+                      .: {}
+                      'f:containerPort': {}
+                      'f:protocol': {}
+                  'f:resources': {}
+                  'f:terminationMessagePath': {}
+                  'f:terminationMessagePolicy': {}
+              'f:dnsPolicy': {}
+              'f:restartPolicy': {}
+              'f:schedulerName': {}
+              'f:securityContext': {}
+              'f:terminationGracePeriodSeconds': {}
+      manager: kubectl-client-side-apply
+      operation: Update
+      time: '2024-01-11T23:03:01Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:replicas': {}
+          'f:template':
+            'f:spec':
+              'f:containers':
+                'k:{"name":"flask-app"}':
+                  'f:image': {}
+      manager: GoogleCloudConsole
+      operation: Update
+      time: '2024-01-12T22:53:28Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            'f:deployment.kubernetes.io/revision': {}
+        'f:status':
+          'f:availableReplicas': {}
+          'f:conditions':
+            .: {}
+            'k:{"type":"Available"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:lastUpdateTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+            'k:{"type":"Progressing"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:lastUpdateTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+          'f:observedGeneration': {}
+          'f:readyReplicas': {}
+          'f:replicas': {}
+          'f:updatedReplicas': {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2024-01-13T20:06:37Z'
+  name: flask-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+        - env:
+            - name: MONGO_URI
+              valueFrom:
+                secretKeyRef:
+                  key: MONGO_URI
+                  name: config-secrets
+            - name: MAIL_SERVER
+              valueFrom:
+                secretKeyRef:
+                  key: MAIL_SERVER
+                  name: config-secrets
+            - name: MAIL_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: MAIL_PORT
+                  name: config-secrets
+            - name: MAIL_USE_TLS
+              valueFrom:
+                secretKeyRef:
+                  key: MAIL_USE_TLS
+                  name: config-secrets
+            - name: MAIL_USE_SSL
+              valueFrom:
+                secretKeyRef:
+                  key: MAIL_USE_SSL
+                  name: config-secrets
+            - name: MAIL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: MAIL_USERNAME
+                  name: config-secrets
+            - name: MAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MAIL_PASSWORD
+                  name: config-secrets
+            - name: CELERY_BROKER
+              valueFrom:
+                secretKeyRef:
+                  key: CELERY_BROKER
+                  name: config-secrets
+            - name: CELERY_BACKEND
+              valueFrom:
+                secretKeyRef:
+                  key: CELERY_BACKEND
+                  name: config-secrets
+            - name: SENDER_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  key: SENDER_EMAIL
+                  name: config-secrets
+            - name: SENDER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: SENDER_PASSWORD
+                  name: config-secrets
+            - name: SENDER_NAME
+              valueFrom:
+                secretKeyRef:
+                  key: SENDER_NAME
+                  name: config-secrets
+            - name: ADMIN_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  key: ADMIN_EMAIL
+                  name: config-secrets
+          image: gcr.io/fifth-incentive-409919/github_akshay771_devdock_backend
+          imagePullPolicy: IfNotPresent
+          name: flask-app
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/neg: '{"ingress":true}'
+  managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:kubectl.kubernetes.io/last-applied-configuration': {}
+        'f:spec':
+          'f:internalTrafficPolicy': {}
+          'f:ports':
+            .: {}
+            'k:{"port":5000,"protocol":"TCP"}':
+              .: {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+          'f:sessionAffinity': {}
+      manager: kubectl-client-side-apply
+      operation: Update
+      time: '2024-01-10T20:54:39Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:loadBalancer':
+            'f:ingress': {}
+      manager: cloud-controller-manager
+      operation: Update
+      subresource: status
+      time: '2024-01-10T21:04:01Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:allocateLoadBalancerNodePorts': {}
+          'f:externalTrafficPolicy': {}
+          'f:selector': {}
+          'f:type': {}
+      manager: GoogleCloudConsole
+      operation: Update
+      time: '2024-01-10T21:06:37Z'
+  name: flask-service
+  namespace: default
+spec:
+  clusterIP: 10.48.12.89
+  clusterIPs:
+    - 10.48.12.89
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - port: 5000
+      protocol: TCP
+      targetPort: 5000
+  selector:
+    app: flask-app
+  sessionAffinity: None
+  type: ClusterIP

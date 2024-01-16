@@ -3,10 +3,11 @@ kind: Ingress
 metadata:
  name: nginx-ingress
  annotations:
-   kubernetes.io/ingress.global-static-ip-name: "nginx-static-ip"
+   kubernetes.io/ingress.global-static-ip-name: "static-ip"
 
 spec:
  rules:
+ - host: devdock.work.gd
  - http:
      paths:
      - path: /
