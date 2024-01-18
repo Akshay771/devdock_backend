@@ -79,7 +79,7 @@ class SenderIP(Resource):
 
 
 api.add_resource(FlaskHealthCheck, "/health-check")
-api.add_resource(TestEndPoint, "/test")
+api.add_resource(TestEndPoint, "/version-check")
 # api.add_resource(CeleryHealthCheck, "/celery-health-check")
-api.add_resource(SubmitForm, "/submit_form")
+api.add_resource(SubmitForm, "/submit-form")
 api.add_resource(SenderIP, "/client-ip")
