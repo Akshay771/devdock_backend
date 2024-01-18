@@ -69,6 +69,8 @@ class SenderIP(Resource):
 
     def get(self):
         forwarded_for = request.headers.get('X-Forwarded-For', None)
+        print(forwarded_for)
+        print(type(forwarded_for))
         ip_address = request.remote_addr
         resp = {"sender ip": str(forwarded_for)}
         return make_response(resp)
