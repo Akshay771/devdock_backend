@@ -68,8 +68,9 @@ class TestEndPoint(Resource):
 class SenderIP(Resource):
 
     def get(self):
+        forwarded_for = request.headers.get('X-Forwarded-For', None)
         ip_address = request.remote_addr
-        resp = {"sender ip": str(ip_address)}
+        resp = {"sender ip": str(forwarded_for)}
         return make_response(resp)
 
 
