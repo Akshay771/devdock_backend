@@ -65,8 +65,16 @@ class TestEndPoint(Resource):
 #         except Exception as e:
 #             return {"status": "error", "message": str(e)}, 500
 
+class SenderIP(Resource):
+
+    def get(self):
+        ip_address = request.remote_addr
+        resp = {"sender ip": str(ip_address)}
+        return make_response(resp)
+
 
 api.add_resource(FlaskHealthCheck, "/health-check")
 api.add_resource(TestEndPoint, "/test")
 # api.add_resource(CeleryHealthCheck, "/celery-health-check")
 api.add_resource(SubmitForm, "/submit_form")
+api.add_resource(SenderIP, "/sender-ip")
