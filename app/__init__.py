@@ -8,7 +8,7 @@ from celery import Celery
 from app.celery_config.celery_worker import make_celery
 
 app = Flask(__name__)
-CORS(app, resources={r"/submit_form": {"origins": "https://devdock.linkpc.net"}})  # This enables CORS for all routes
+CORS(app)  # This enables CORS for all routes
 # or specific
 api = Api(app)
 
