@@ -14,6 +14,9 @@ class SubmitForm(Resource):
     def post(self):
         print(os.environ.get('CELERY_BROKER'))
         try:
+            forwarded_for = request.headers.get('X-Forwarded-For', None)
+            client_ip = forwarded_for.split(',')[0].strip()
+            print(client_ip)
             if request.is_json:
                 # Handle JSON data
                 data = request.get_json(force=True)
