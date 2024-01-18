@@ -69,10 +69,9 @@ class SenderIP(Resource):
 
     def get(self):
         forwarded_for = request.headers.get('X-Forwarded-For', None)
-        print(forwarded_for)
-        print(type(forwarded_for))
-        ip_address = request.remote_addr
-        resp = {"sender ip": str(forwarded_for)}
+        client_ip = forwarded_for.split(',')[0].strip()
+        # ip_address = request.remote_addr
+        resp = {"client ip": str(client_ip)}
         return make_response(resp)
 
 
@@ -80,4 +79,4 @@ api.add_resource(FlaskHealthCheck, "/health-check")
 api.add_resource(TestEndPoint, "/test")
 # api.add_resource(CeleryHealthCheck, "/celery-health-check")
 api.add_resource(SubmitForm, "/submit_form")
-api.add_resource(SenderIP, "/sender-ip")
+api.add_resource(SenderIP, "/client-ip")
