@@ -9,8 +9,10 @@ from app.celery_config.celery_worker import make_celery
 
 app = Flask(__name__)
 CORS(app)  # This enables CORS for all routes
+# or specific
 api = Api(app)
 
+print(os.environ.get('MONGO_URI'))
 app.config['MONGO_URI'] = os.environ.get('MONGO_URI')
 app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER')
 app.config['MAIL_PORT'] = os.environ.get('MAIL_PORT')
