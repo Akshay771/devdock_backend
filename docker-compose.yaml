@@ -10,8 +10,8 @@ services:
       - "80:80"
     depends_on:
       - flask-service
-    env_file:
-      - .env
+#    env_file:
+#      - .env
 
   flask-service:
     build:
@@ -23,16 +23,16 @@ services:
     depends_on:
       - rabbitmq
       - celery
-    env_file:
-      - .env
+#    env_file:
+#      - .env
 
   rabbitmq:
     image: "rabbitmq:3-management"
     ports:
       - "5672:5672"
       - "15672:15672"
-    env_file:
-      - .env
+#    env_file:
+#      - .env
 #  redis:
 #    image: "redis"
 #    ports:
@@ -45,8 +45,8 @@ services:
     image: celery_app:v1
     depends_on:
       - rabbitmq
-    env_file:
-      - .env
+#    env_file:
+#      - .env
   mongo:
     image: "mongo"
     ports:
