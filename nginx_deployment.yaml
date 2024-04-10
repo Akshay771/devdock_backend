@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: ssl-deployment
   labels:
-    app: nginx-app
+    app: ssl-app
 spec:
   selector:
     matchLabels:
-      app: nginx-app
+      app: ssl-app
   template:
     metadata:
       labels:
-        app: nginx-app
+        app: ssl-app
     spec:
       containers:
-      - name: nginx-app
-        image: gcr.io/fifth-incentive-409919/nginx-app-release:nginx-app-release-1.0.3
+      - name: ssl-app
+        image: gcr.io/fifth-incentive-409919/ssl-app-release:ssl-app-release-1.0.3
         ports:
         - containerPort: 80

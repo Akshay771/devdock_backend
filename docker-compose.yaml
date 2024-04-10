@@ -8,10 +8,11 @@ services:
     image: nginx:v1
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - flask-service
     env_file:
-      - test.env
+      - .env
 
   flask-service:
     build:
@@ -24,7 +25,7 @@ services:
       - rabbitmq
       - celery
     env_file:
-      - test.env
+      - .env
 
   rabbitmq:
     image: "rabbitmq:3-management"
@@ -32,7 +33,7 @@ services:
       - "5672:5672"
       - "15672:15672"
     env_file:
-      - test.env
+      - .env
 #  redis:
 #    image: "redis"
 #    ports:
@@ -46,7 +47,7 @@ services:
     depends_on:
       - rabbitmq
     env_file:
-      - test.env
+      - .env
   mongo:
     image: "mongo"
     ports:
