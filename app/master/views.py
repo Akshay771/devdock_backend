@@ -53,7 +53,7 @@ class FlaskHealthCheck(Resource):
 class TestEndPoint(Resource):
 
     def get(self):
-        return make_response(jsonify({"Modified Version": "v3"}), 200)
+        return make_response(jsonify({"Modified Version": "v4"}), 200)
 
 
 # class CeleryHealthCheck(Resource):
